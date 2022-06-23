@@ -5,7 +5,7 @@
     <color name="pink3">#FF69B4</color>
     <color name="pink4">#C71585</color>
     <color name="darkGray">#CC505050</color>
-    <color name="gray">#CCaaaaaa</color>
+    <color name="gray">#dcdcdc</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

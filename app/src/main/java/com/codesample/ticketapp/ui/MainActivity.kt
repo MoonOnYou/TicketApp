@@ -4,7 +4,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import androidx.viewpager.widget.ViewPager
+import com.codesample.ticketapp.PeekingLinearLayoutManager
 import com.codesample.ticketapp.R
 import com.codesample.ticketapp.base.BaseActivity
 import com.codesample.ticketapp.databinding.ActivityMainBinding
@@ -28,6 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun getData() {
         mViewModel.getHomeData({
             setupBannerAdapter()
+            setupVideoAdapter()
+            setupEventAdapter()
             setupTag()
             Toast.makeText(this,"성공", Toast.LENGTH_SHORT).show()
         }, {
@@ -49,6 +54,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
+    private fun setupEventAdapter() {
+        val adapter = EventAdapter(mViewModel.eventList.value)
+        mViewDataBinding.recyclerViewEvent.adapter = adapter
+    }
+
     private fun makeChipTextView(tag : String) : TextView {
         val textView = TextView(ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight_NoActionBar))
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -63,6 +73,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         textView.text = tag
 
         return textView
+    }
+
+    private fun setupVideoAdapter() {
+        val adapter = VideoAdapter(mViewModel.tvtList.value)
+        mViewDataBinding.recyclerViewVideo.layoutManager = PeekingLinearLayoutManager(this)
+        mViewDataBinding.recyclerViewVideo.adapter = adapter
+
+        // 한칸 씩 이동하게 설정
+        val snapHelper: SnapHelper = PagerSnapHelper()
+        if (mViewDataBinding.recyclerViewVideo.onFlingListener == null) snapHelper.attachToRecyclerView(mViewDataBinding.recyclerViewVideo)
     }
 
     private fun setupBannerAdapter() {
