@@ -11,6 +11,7 @@ import retrofit2.HttpException
 class MainViewModel(val homeAPI: HomeAPI) : BaseViewModel() {
     var bannerList: MutableLiveData<ArrayList<Banner>?> = MutableLiveData(arrayListOf())
     var tagList: MutableLiveData<ArrayList<DisplayTag>?> = MutableLiveData(arrayListOf())
+    var tagNameList: MutableLiveData<ArrayList<String>?> = MutableLiveData(arrayListOf())
     var eventList: MutableLiveData<ArrayList<RecommendEvent>?> = MutableLiveData(arrayListOf())
     var newtList: MutableLiveData<ArrayList<NewEvent>?> = MutableLiveData(arrayListOf())
     var tvtList: MutableLiveData<ArrayList<YsTv>?> = MutableLiveData(arrayListOf())
@@ -34,5 +35,14 @@ class MainViewModel(val homeAPI: HomeAPI) : BaseViewModel() {
             if (it is HttpException) fail?.invoke(it.message())
             else fail?.invoke("ㅜ_ㅜ fail")
         }))
+    }
+
+    fun getTagName() {
+        val tagModelList = tagList.value
+        if (tagModelList != null) {
+            for (tag in tagModelList) {
+                tagNameList.value?.add("#${tag.tagName}")
+            }
+        }
     }
 }

@@ -1,10 +1,14 @@
 package com.codesample.ticketapp.ui
 
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewpager.widget.ViewPager
 import com.codesample.ticketapp.R
 import com.codesample.ticketapp.base.BaseActivity
 import com.codesample.ticketapp.databinding.ActivityMainBinding
+import com.codesample.ticketapp.util.SizeUtil
 import org.koin.android.ext.android.inject
 
 
@@ -24,6 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun getData() {
         mViewModel.getHomeData({
             setupBannerAdapter()
+            setupTag()
             Toast.makeText(this,"성공", Toast.LENGTH_SHORT).show()
         }, {
             Toast.makeText(this,"$it", Toast.LENGTH_SHORT).show()
@@ -32,6 +37,32 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private fun disableRecyclerViewScroll() {
         mViewDataBinding.recyclerViewEvent.isNestedScrollingEnabled = false
+    }
+
+    private fun setupTag() {
+        mViewModel.getTagName()
+        val tags = mViewModel.tagNameList.value
+        if (tags != null) {
+            for (tag in tags) {
+                mViewDataBinding.layoutFlexbox.addView(makeChipTextView(tag))
+            }
+        }
+    }
+
+    private fun makeChipTextView(tag : String) : TextView {
+        val textView = TextView(ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight_NoActionBar))
+        val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val margin4 = SizeUtil.convertDpToPixel(4f).toInt()
+        val padding2 = SizeUtil.convertDpToPixel(2f).toInt()
+        val padding4 = SizeUtil.convertDpToPixel(4f).toInt()
+        params.setMargins(margin4, margin4, margin4, margin4)
+        textView.layoutParams = params
+        textView.setPadding(padding4, padding2, padding4, padding2)
+        textView.setBackgroundColor(getColor(R.color.pink1))
+        textView.setTextColor(getColor(R.color.pink4))
+        textView.text = tag
+
+        return textView
     }
 
     private fun setupBannerAdapter() {
