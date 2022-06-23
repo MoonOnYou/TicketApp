@@ -12,4 +12,5 @@ object NetworkConfig {
 
 object IntentKey {
     const val EVENT = "com.codesample.ticketapp.constants.EVENT"
+    const val VIDEO = "com.codesample.ticketapp.constants.VIDEO"
 }

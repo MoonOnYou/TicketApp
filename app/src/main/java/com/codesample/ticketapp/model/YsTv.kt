@@ -1,5 +1,9 @@
 package com.codesample.ticketapp.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class YsTv(
     val tvCode: String,
     val tvFullImgUrl: String,
@@ -12,4 +16,4 @@ data class YsTv(
     val tvVideoThumb: String,
     val tvVideoUrl: String,
     val tvViewCount: String
-)
+): Parcelable

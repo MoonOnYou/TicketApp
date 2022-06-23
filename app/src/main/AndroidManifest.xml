@@ -11,8 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TicketApp">
-
+        android:theme="@style/Theme.TicketApp"
+        android:usesCleartextTraffic="true">
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.event.EventActivity"/>
+        <activity android:name=".ui.event.EventActivity" />
+        <activity android:name=".ui.video.VideoActivity"/>
     </application>
 
 </manifest>

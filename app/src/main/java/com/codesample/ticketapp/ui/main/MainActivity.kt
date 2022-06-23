@@ -15,7 +15,9 @@ import com.codesample.ticketapp.base.BaseActivity
 import com.codesample.ticketapp.constants.IntentKey
 import com.codesample.ticketapp.databinding.ActivityMainBinding
 import com.codesample.ticketapp.model.Event
+import com.codesample.ticketapp.model.YsTv
 import com.codesample.ticketapp.ui.event.EventActivity
+import com.codesample.ticketapp.ui.video.VideoActivity
 import com.codesample.ticketapp.util.SizeUtil
 import org.koin.android.ext.android.inject
 
@@ -101,6 +103,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val adapter = VideoAdapter(mViewModel.tvtList.value)
         mViewDataBinding.recyclerViewVideo.layoutManager = PeekingLinearLayoutManager(this)
         mViewDataBinding.recyclerViewVideo.adapter = adapter
+        adapter.clickListener = View.OnClickListener {
+            val video = it.tag as YsTv
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra(IntentKey.VIDEO, video)
+            startActivity(intent)
+        }
 
         // 한칸 씩 이동하게 설정
         val snapHelper: SnapHelper = PagerSnapHelper()

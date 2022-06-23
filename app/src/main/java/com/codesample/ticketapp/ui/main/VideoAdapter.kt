@@ -12,7 +12,7 @@ import com.codesample.ticketapp.model.YsTv
 class VideoAdapter(
     var items : ArrayList<YsTv>?
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    var clickListener : View.OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return VideoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_video, parent, false))
@@ -30,6 +30,8 @@ class VideoAdapter(
         holder.binding.imageView.setImageUrl(items?.get(position)?.tvFullImgUrl)
         holder.binding.textViewTitle.text = items?.get(position)?.tvNameMain
         holder.binding.textViewViewCount.text = "조회수 ${items?.get(position)?.tvViewCount}"
+        holder.binding.layout.tag = items?.get(position)
+        holder.binding.layout.setOnClickListener(clickListener)
     }
 
     class VideoViewHolder(private var v: View):BaseViewHolder<ItemVideoBinding>(v)
