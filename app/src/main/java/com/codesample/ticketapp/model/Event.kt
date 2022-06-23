@@ -1,6 +1,10 @@
 package com.codesample.ticketapp.model
 
-data class RecommendEvent(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Event(
     val comment: String,
     val cpmBudgetScore: Double,
     val currencyName: String,
@@ -20,4 +24,4 @@ data class RecommendEvent(
     val thumbnailImageUrl: String,
     val wishCount: Int,
     val wishIcon: String
-)
+): Parcelable

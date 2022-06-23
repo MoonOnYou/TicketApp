@@ -1,5 +1,7 @@
-package com.codesample.ticketapp.ui
+package com.codesample.ticketapp.ui.main
 
+import android.content.Intent
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -10,7 +12,10 @@ import androidx.viewpager.widget.ViewPager
 import com.codesample.ticketapp.PeekingLinearLayoutManager
 import com.codesample.ticketapp.R
 import com.codesample.ticketapp.base.BaseActivity
+import com.codesample.ticketapp.constants.IntentKey
 import com.codesample.ticketapp.databinding.ActivityMainBinding
+import com.codesample.ticketapp.model.Event
+import com.codesample.ticketapp.ui.event.EventActivity
 import com.codesample.ticketapp.util.SizeUtil
 import org.koin.android.ext.android.inject
 
@@ -34,7 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             setupVideoAdapter()
             setupEventAdapter()
             setupTag()
-            Toast.makeText(this,"성공", Toast.LENGTH_SHORT).show()
+            mViewDataBinding.scrollView.visibility = View.VISIBLE
+            mViewDataBinding.progressBar.visibility = View.GONE
         }, {
             Toast.makeText(this,"$it", Toast.LENGTH_SHORT).show()
         })
@@ -57,8 +63,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun setupEventAdapter() {
         val adapter = EventAdapter(mViewModel.eventList.value)
         mViewDataBinding.recyclerViewEvent.adapter = adapter
-        val newAdapter = NewEventAdapter(mViewModel.newList.value)
+        adapter.clickListener = View.OnClickListener {
+            val event = it.tag as Event
+            startEventActivity(event)
+        }
+        val newAdapter = EventAdapter(mViewModel.newList.value)
         mViewDataBinding.recyclerViewNewEvent.adapter = newAdapter
+        newAdapter.clickListener = View.OnClickListener {
+            val event = it.tag as Event
+            startEventActivity(event)
+        }
+    }
+
+    private fun startEventActivity(event: Event) {
+        val intent = Intent(this, EventActivity::class.java)
+        intent.putExtra(IntentKey.EVENT, event)
+        startActivity(intent)
     }
 
     private fun makeChipTextView(tag : String) : TextView {

@@ -1,4 +1,4 @@
-package com.codesample.ticketapp.ui
+package com.codesample.ticketapp.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import com.codesample.ticketapp.api.HomeAPI
@@ -12,8 +12,8 @@ class MainViewModel(val homeAPI: HomeAPI) : BaseViewModel() {
     var bannerList: MutableLiveData<ArrayList<Banner>?> = MutableLiveData(arrayListOf())
     var tagList: MutableLiveData<ArrayList<DisplayTag>?> = MutableLiveData(arrayListOf())
     var tagNameList: MutableLiveData<ArrayList<String>?> = MutableLiveData(arrayListOf())
-    var eventList: MutableLiveData<ArrayList<RecommendEvent>?> = MutableLiveData(arrayListOf())
-    var newList: MutableLiveData<ArrayList<NewEvent>?> = MutableLiveData(arrayListOf())
+    var eventList: MutableLiveData<ArrayList<Event>?> = MutableLiveData(arrayListOf())
+    var newList: MutableLiveData<ArrayList<Event>?> = MutableLiveData(arrayListOf())
     var tvtList: MutableLiveData<ArrayList<YsTv>?> = MutableLiveData(arrayListOf())
 
     fun getHomeData(
