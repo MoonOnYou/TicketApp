@@ -13,7 +13,7 @@ class MainViewModel(val homeAPI: HomeAPI) : BaseViewModel() {
     var tagList: MutableLiveData<ArrayList<DisplayTag>?> = MutableLiveData(arrayListOf())
     var tagNameList: MutableLiveData<ArrayList<String>?> = MutableLiveData(arrayListOf())
     var eventList: MutableLiveData<ArrayList<RecommendEvent>?> = MutableLiveData(arrayListOf())
-    var newtList: MutableLiveData<ArrayList<NewEvent>?> = MutableLiveData(arrayListOf())
+    var newList: MutableLiveData<ArrayList<NewEvent>?> = MutableLiveData(arrayListOf())
     var tvtList: MutableLiveData<ArrayList<YsTv>?> = MutableLiveData(arrayListOf())
 
     fun getHomeData(
@@ -25,7 +25,7 @@ class MainViewModel(val homeAPI: HomeAPI) : BaseViewModel() {
                 bannerList.value = it.body()?.results?.bannerList
                 tagList.value = it.body()?.results?.displayTagList
                 eventList.value = it.body()?.results?.recommendEventList
-                newtList.value = it.body()?.results?.newEventList
+                newList.value = it.body()?.results?.newEventList
                 tvtList.value = it.body()?.results?.ysTvList
                 complete?.invoke()
             } else {

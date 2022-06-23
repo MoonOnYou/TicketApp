@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TicketApp</string>
     <string name="popular_video">TV 인기 영상</string>
-    <string name="event">이벤트</string>
+    <string name="event">추천 이벤트</string>
+    <string name="new_event">신규 이벤트</string>
 </resources>

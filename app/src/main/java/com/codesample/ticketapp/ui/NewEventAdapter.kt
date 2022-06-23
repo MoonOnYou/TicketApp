@@ -8,10 +8,10 @@ import com.codesample.ticketapp.R
 import com.codesample.ticketapp.base.BaseViewHolder
 import com.codesample.ticketapp.databinding.ItemEventBinding
 import com.codesample.ticketapp.extension.setImageUrl
-import com.codesample.ticketapp.model.RecommendEvent
+import com.codesample.ticketapp.model.NewEvent
 
-class EventAdapter(
-    var items : ArrayList<RecommendEvent>?
+class NewEventAdapter(
+    var items : ArrayList<NewEvent>?
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 

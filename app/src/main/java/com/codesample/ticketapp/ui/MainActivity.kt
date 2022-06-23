@@ -57,6 +57,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun setupEventAdapter() {
         val adapter = EventAdapter(mViewModel.eventList.value)
         mViewDataBinding.recyclerViewEvent.adapter = adapter
+        val newAdapter = NewEventAdapter(mViewModel.newList.value)
+        mViewDataBinding.recyclerViewNewEvent.adapter = newAdapter
     }
 
     private fun makeChipTextView(tag : String) : TextView {
