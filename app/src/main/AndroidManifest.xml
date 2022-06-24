@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.event.EventActivity" />
-        <activity android:name=".ui.video.VideoActivity"/>
+        <activity android:name=".ui.video.VideoActivity" />
+        <activity android:name=".ui.web_view.WebViewActivity"/>
     </application>
 
 </manifest>

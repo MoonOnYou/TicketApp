@@ -27,6 +27,8 @@ class VideoActivity : BaseActivity<ActivityVideoBinding, VideoViewModel>() {
             mViewDataBinding.lifecycleOwner?.lifecycle?.addObserver(it)
             it.addYouTubePlayerListener(youtubeListener)
         }
+        mViewDataBinding.textViewName.text = mViewModel.videoModel.value?.tvNameMain
+        mViewDataBinding.textViewViewCont.text = "${mViewModel.videoModel.value?.tvViewCount}명이 이글을 봤어요"
     }
 
     // YouTubePlayerListener
