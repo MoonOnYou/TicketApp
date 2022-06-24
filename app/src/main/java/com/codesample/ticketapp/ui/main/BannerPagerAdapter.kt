@@ -1,17 +1,22 @@
 package com.codesample.ticketapp.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.codesample.ticketapp.R
+import com.codesample.ticketapp.constants.IntentKey
 import com.codesample.ticketapp.databinding.ItemImageViewBinding
 import com.codesample.ticketapp.extension.setImageUrl
 import com.codesample.ticketapp.model.Banner
+import com.codesample.ticketapp.ui.web_view.WebViewActivity
 
 
 class BannerPagerAdapter(
+    var context: Context,
     var items: ArrayList<Banner>? = arrayListOf()
 ) : PagerAdapter() {
     var listener: View.OnClickListener? = null
@@ -22,9 +27,11 @@ class BannerPagerAdapter(
         if (items?.isNotEmpty() == true) {
             itemView.setImageUrl(items?.get(position)?.bannerImg)
         }
-
-        itemView.tag = position
-        itemView.setOnClickListener(listener)
+        itemView.setOnClickListener {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra(IntentKey.LINK, items?.get(position)?.bannerLink)
+            context.startActivity(intent)
+        }
 
         container.addView(binding.root)
         return binding.root

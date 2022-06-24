@@ -116,7 +116,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun setupBannerAdapter() {
-        val adapter = BannerPagerAdapter(mViewModel.bannerList.value)
+        val adapter = BannerPagerAdapter(this, mViewModel.bannerList.value)
         mViewDataBinding.viewPagerBanner.adapter = adapter
         val totalPage = mViewModel.bannerList.value?.size
         mViewDataBinding.textViewBannerTotalIndex.text = "/ $totalPage"
