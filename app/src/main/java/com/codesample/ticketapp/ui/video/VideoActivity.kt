@@ -9,7 +9,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
 import org.koin.android.ext.android.inject
 
-class VideoActivity : BaseActivity<ActivityVideoBinding, VideoViewModel>() {
+class VideoActivity : BaseActivity<ActivityVideoBinding>() {
     private val mViewModel : VideoViewModel by inject()
 
     override fun getLayoutId(): Int {
@@ -23,12 +23,13 @@ class VideoActivity : BaseActivity<ActivityVideoBinding, VideoViewModel>() {
 
     private fun getData() {
         mViewModel.videoModel.value = intent.getParcelableExtra(IntentKey.VIDEO)
-        mViewDataBinding.youtubePlayerView?.let {
+        mViewDataBinding.youtubePlayerView.let {
             mViewDataBinding.lifecycleOwner?.lifecycle?.addObserver(it)
             it.addYouTubePlayerListener(youtubeListener)
         }
         mViewDataBinding.textViewName.text = mViewModel.videoModel.value?.tvNameMain
-        mViewDataBinding.textViewViewCont.text = "${mViewModel.videoModel.value?.tvViewCount}명이 이글을 봤어요"
+        val viewCount = mViewModel.videoModel.value?.tvViewCount
+        mViewDataBinding.textViewViewCont.text = String.format(getString(R.string.view_count_msg), viewCount)
     }
 
     // YouTubePlayerListener
@@ -40,8 +41,6 @@ class VideoActivity : BaseActivity<ActivityVideoBinding, VideoViewModel>() {
             youTubePlayer: YouTubePlayer,
             state: PlayerConstants.PlayerState
         ) {
-            if (state == PlayerConstants.PlayerState.PLAYING) {
-            }
         }
 
         override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {

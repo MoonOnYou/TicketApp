@@ -10,7 +10,7 @@ import com.codesample.ticketapp.constants.IntentKey
 import com.codesample.ticketapp.databinding.ActivityWebViewBinding
 import org.koin.android.ext.android.inject
 
-class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewViewModel>() {
+class WebViewActivity : BaseActivity<ActivityWebViewBinding>() {
     private val mViewModel : WebViewViewModel by inject()
 
     override fun getLayoutId(): Int {

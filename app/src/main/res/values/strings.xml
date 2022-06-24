@@ -3,4 +3,7 @@
     <string name="popular_video">TV 인기 영상</string>
     <string name="event">추천 이벤트</string>
     <string name="new_event">신규 이벤트</string>
+    <string name="monetary_unit">%1$s원</string>
+    <string name="total_page">/ %1$s</string>
+    <string name="view_count_msg">%1$s명이 이글을 봤어요!</string>
 </resources>

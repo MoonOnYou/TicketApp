@@ -22,7 +22,7 @@ import com.codesample.ticketapp.util.SizeUtil
 import org.koin.android.ext.android.inject
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val mViewModel : MainViewModel by inject()
 
     override fun getLayoutId(): Int {
@@ -119,7 +119,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val adapter = BannerPagerAdapter(this, mViewModel.bannerList.value)
         mViewDataBinding.viewPagerBanner.adapter = adapter
         val totalPage = mViewModel.bannerList.value?.size
-        mViewDataBinding.textViewBannerTotalIndex.text = "/ $totalPage"
+        val totalText = String.format(getString(R.string.total_page), totalPage)
+        mViewDataBinding.textViewBannerTotalIndex.text = totalText
     }
 
     private fun setUpCurrentPageListener() {
@@ -135,8 +136,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             override fun onPageSelected(position: Int) {
                 val currentPage = position + 1
                 val totalPage = mViewModel.bannerList.value?.size
+                val totalText = String.format(getString(R.string.total_page), totalPage)
                 mViewDataBinding.textViewBannerIndex.text = "$currentPage"
-                mViewDataBinding.textViewBannerTotalIndex.text = "/ $totalPage"
+                mViewDataBinding.textViewBannerTotalIndex.text = totalText
             }
         })
     }
